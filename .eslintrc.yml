@@ -3,7 +3,7 @@ env:
   browser: true
   commonjs: true
 
-extends: ['airbnb', 'airbnb/hooks']
+extends: ['airbnb', 'airbnb/hooks', 'plugin:react/recommended']
 
 parserOptions:
   ecmaFeatures:
@@ -16,3 +16,8 @@ plugins: ['react']
 settings:
   react:
     version: '16'
+
+rules: {
+  "react/jsx-filename-extension": [0],
+  "import/no-named-as-default": 0
+}
