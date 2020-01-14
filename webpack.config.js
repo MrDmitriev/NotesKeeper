@@ -15,9 +15,6 @@ module.exports = {
   module: {
     rules: [
       {
-        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-      },
-      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
