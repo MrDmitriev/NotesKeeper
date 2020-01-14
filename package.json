@@ -1,0 +1,42 @@
+{
+  "name": "superman",
+  "version": "0.0.1",
+  "description": "notes-keeper",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3"
+  },
+  "devDependencies": {
+    "@babel/core": "7.8.3",
+    "@babel/preset-env": "7.8.3",
+    "@babel/preset-react": "7.8.3",
+    "babel-loader": "8.0.6",
+    "webpack": "4.41.5",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.10.1"
+  },
+  "scripts": {
+    "test": "npm run eslint && jest",
+    "eslint": "eslint --ext .jsx --ext .js src/",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrDmitriev/NotesKeeper.git"
+  },
+  "keywords": [
+    "super"
+  ],
+  "author": "Sergey Dmitriev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrDmitriev/NotesKeeper/issues"
+  },
+  "homepage": "https://github.com/MrDmitriev/NotesKeeper#readme"
+}
