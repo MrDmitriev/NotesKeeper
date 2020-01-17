@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import NotesList from '../NotesList/NotesList';
 import {connect} from 'react-redux';
-import {getNotes} from '../../selectors/data';
-import { ActionCreator } from '../../reducers/';
+
+import NotesList from '../NotesList/NotesList';
+import {getNotes, getCurrentNote, getLang} from '../../selectors/data';
+import {ActionCreator} from '../../reducers/';
+import NoteCard from '../atoms/NoteCard';
+import LangSwitcher from '../LangSwitcher/LangSwitcher';
 
 const NoteDetail = (props) => {
-  const {notes} = props;
+  const {notes, loadNotes, getNoteDetail, match, note, lang} = props;
+  const id = Number(match.params.id);
   useEffect(() => {
-    props.loadNotes();
-  }, []);
+    loadNotes();
+    getNoteDetail(id);
+  }, [match]);
+
   return (
     <>
     <div className="overlay" />
@@ -26,45 +32,40 @@ const NoteDetail = (props) => {
                 <p>Create, edit and manage your notes easier </p>
               </p>
             </div>
+            <NoteCard note={note} />
           </div>
-          <NotesList notes={notes}/>
+          <NotesList notes={notes} lang={lang}/>
         </div>
       </div>
     </div>
 
-    <div className="social-icons">
-      <ul className="list-unstyled text-center mb-0">
-        <li className="list-unstyled-item">
-          <a href="#">
-            <p>RU</p>
-          </a>
-        </li>
-        <li className="list-unstyled-item">
-          <a href="#">
-            <p>CZ</p>
-          </a>
-        </li>
-        <li className="list-unstyled-item">
-          <a href="#">
-            <p>DE</p>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <LangSwitcher />
   </>
   );
 };
 
 NoteDetail.propTypes = {
+  lang: PropTypes.string,
+  note: PropTypes.object,
   notes: PropTypes.array,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }),
+  loadNotes: PropTypes.func,
+  getNoteDetail: PropTypes.func,
 };
 
 export default connect(
     (state) => ({
-      notes: getNotes(state)
+      notes: getNotes(state),
+      note: getCurrentNote(state),
+      lang: getLang(state),
     }),
     (dispatch) => ({
       loadNotes: () => dispatch(ActionCreator.loadNotes()),
+      getNoteDetail: (id) => dispatch(ActionCreator.getNoteDetail(id)),
     })
 )(NoteDetail);
 

@@ -5,7 +5,7 @@ import {ListGroup} from 'react-bootstrap';
 import Note from './components/Note';
 
 const NotesList = (props) => {
-  const {notes = []} = props;
+  const {notes = [], lang} = props;
 
   const [editId, setEditId] = useState(null);
 
@@ -21,6 +21,7 @@ const NotesList = (props) => {
         {notes && notes.map((item, i) => {
           const isEditing = Number(item.id) === Number(editId);
           return <Note
+            lang={lang}
             note={item}
             key={i}
             isEditing={isEditing}
@@ -34,7 +35,8 @@ const NotesList = (props) => {
 };
 
 NotesList.propTypes = {
-  notes: PropTypes.array
+  notes: PropTypes.array,
+  lang: PropTypes.string,
 };
 
 export default NotesList;
