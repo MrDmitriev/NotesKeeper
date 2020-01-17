@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducers/index.js';
-import {getNotes} from '../../selectors/data.js';
+import {getNotes, getLang} from '../../selectors/data.js';
 import NotesList from '../NotesList/NotesList';
 import {Button} from '../atoms/Button.jsx';
+import {getLabel} from '../../utils/utils.js';
+import LangSwitcher from '../LangSwitcher/LangSwitcher.jsx';
 
 
 const MainPage = (props) => {
-  const {notes = [], updateFieldValue, createNote} = props;
+  const {notes = [], updateFieldValue, createNote, lang} = props;
   const handleAddNote = () => {
     createNote();
   };
@@ -35,10 +37,10 @@ const MainPage = (props) => {
         <div className="row h-100">
           <div className="col-12 my-auto">
             <div className="masthead-content text-white py-5 py-md-0">
-              <h1 className="mb-3">Notes Keeper</h1>
+              <h1 className="mb-3">{getLabel(lang, `header`)}</h1>
               <p className="mb-5">
-                <strong>Keep all your notes in one place</strong>
-                <p>Create, edit and manage your notes easier </p>
+                <strong>{getLabel(lang, `sloganBold`)}</strong>
+                <p>{getLabel(lang, `slogan`)}</p>
               </p>
               <div className="input-group input-group-newsletter">
                 <input
@@ -46,7 +48,7 @@ const MainPage = (props) => {
                   type="text"
                   name='noteForm'
                   className="form-control"
-                  placeholder="Enter note..."
+                  placeholder={getLabel(lang, `inputPlaceholder`)}
                   aria-label="Enter note..."
                   aria-describedby="basic-addon"
                 />
@@ -56,7 +58,7 @@ const MainPage = (props) => {
                     onClick={handleAddNote}
                     type="submit"
                   >
-                    Create note
+                    {getLabel(lang, `buttonCreateNote`)}
 
                   </Button>
                 </div>
@@ -64,30 +66,11 @@ const MainPage = (props) => {
             </div>
           </div>
 
-          <NotesList notes={notes}/>
+          <NotesList notes={notes} lang={lang}/>
         </div>
       </div>
     </div>
-
-    <div className="social-icons">
-      <ul className="list-unstyled text-center mb-0">
-        <li className="list-unstyled-item">
-          <a href="#">
-            <p>RU</p>
-          </a>
-        </li>
-        <li className="list-unstyled-item">
-          <a href="#">
-            <p>CZ</p>
-          </a>
-        </li>
-        <li className="list-unstyled-item">
-          <a href="#">
-            <p>DE</p>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <LangSwitcher />
   </>
   );
 };
@@ -97,11 +80,13 @@ MainPage.propTypes = {
   updateFieldValue: PropTypes.func,
   createNote: PropTypes.func,
   notes: PropTypes.array,
+  lang: PropTypes.string,
 };
 
 export default connect(
     (state) => ({
-      notes: getNotes(state)
+      notes: getNotes(state),
+      lang: getLang(state),
     }),
     (dispatch) => ({
       loadNotes: () => dispatch(ActionCreator.loadNotes()),
