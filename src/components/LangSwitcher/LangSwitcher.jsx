@@ -9,7 +9,6 @@ const LangSwitcher = (props) => {
   const {changeLang} = props;
   const handleLangChange = (e) => {
     const lang = e.currentTarget.id;
-    console.log(lang);
     changeLang(lang);
   };
 

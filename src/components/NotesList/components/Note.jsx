@@ -7,9 +7,9 @@ import {Button} from '../../atoms/Button';
 import InputNote from '../../molecules/InputNote';
 import NoteLink from '../../atoms/NoteLink';
 import history from '../../../history/history';
-import { getLabel } from '../../../utils/utils';
-import { connect } from 'react-redux';
-import { ActionCreator } from '../../../reducers';
+import {getLabel} from '../../../utils/utils';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../../reducers';
 
 
 const Note = (props) => {
