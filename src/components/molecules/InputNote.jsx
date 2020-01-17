@@ -40,6 +40,8 @@ const InputNote = (props) => {
 
 
 InputNote.propTypes = {
+  id: PropTypes.number,
+  onSaveHandle: PropTypes.func,
   updateFieldValue: PropTypes.func,
   editNote: PropTypes.func,
 };

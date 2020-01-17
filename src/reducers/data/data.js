@@ -24,30 +24,25 @@ const deleteNote = (id) => (dispatch, getState, api) => {
   });
 };
 
-const loadNotes = () => (dispatch, getState, api) => {
-  return api.get(`/notes`)
-  .then((response) => {
-    dispatch(setNotes(response.data));
-  });
+const loadNotes = () => async (dispatch, getState, api) => {
+  const response = await api.get(`/notes`);
+  dispatch(setNotes(response.data));
 };
 
-const createNote = () => (dispatch, getState, api) => {
+const createNote = () => async (dispatch, getState, api) => {
   const formData = getNoteFormData(getState());
   if (!formData) {
     return false;
   }
-  return api.post(`/notes`, formData)
-  .then((response) => {
-    dispatch(addNote(response.data));
-    dispatch(updateFieldValue(`noteForm`, ``));
-  });
+
+  const response = await api.post(`/notes`, formData);
+  dispatch(addNote(response.data));
+  return dispatch(updateFieldValue(`noteForm`, ``));
 };
 
-const getNoteDetail = (id) => (dispatch, getState, api) => {
-  return api.get(`/notes/${id}`)
-  .then((response) => {
-    dispatch(setCurrentNote(response.data));
-  });
+const getNoteDetail = (id) => async (dispatch, getState, api) => {
+  const response = await api.get(`/notes/${id}`);
+  dispatch(setCurrentNote(response.data));
 };
 
 const editNote = (id) => (dispatch, getState, api) => {

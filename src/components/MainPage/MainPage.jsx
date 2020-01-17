@@ -10,7 +10,7 @@ import {getLabel} from '../../utils/utils.js';
 import LangSwitcher from '../LangSwitcher/LangSwitcher.jsx';
 
 
-const MainPage = (props) => {
+export const MainPage = (props) => {
   const {notes = [], updateFieldValue, createNote, lang} = props;
   const handleAddNote = () => {
     createNote();
