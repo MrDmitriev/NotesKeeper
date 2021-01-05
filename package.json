@@ -4,7 +4,7 @@
   "description": "notes-keeper",
   "main": "index.js",
   "dependencies": {
-    "axios": "0.19.1",
+    "axios": "0.21.1",
     "bootstrap": "^4.4.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
